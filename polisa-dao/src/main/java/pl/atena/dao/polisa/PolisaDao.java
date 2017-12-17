@@ -21,7 +21,7 @@ public class PolisaDao implements BaseDao<Polisa> {
 		Connection c = DB.get();
 
 		PreparedStatement ps = c.prepareStatement(
-				"INSERT INTO POLISA(NR_POLISY, D_PODPISANIA, D_ROZPOCZECIA, D_KONCA, SKLADKA) VALUES (?,?,?,?,?)",
+				"INSERT INTO POLISA (NR_POLISY, D_PODPISANIA, D_ROZPOCZECIA, D_KONCA, SKLADKA) VALUES (?,?,?,?,?)",
 				Statement.RETURN_GENERATED_KEYS);
 
 		ps.setString(1, entity.getNrPolisy());
@@ -38,17 +38,40 @@ public class PolisaDao implements BaseDao<Polisa> {
 	}
 
 	public Polisa retrieve(Long id) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection c = DB.get();
+		PreparedStatement ps = c.prepareStatement(
+				"SELECT * FROM POLISA WHERE ID IN (?)",
+				Statement.RETURN_GENERATED_KEYS);
+		ps.setLong(1, id);
 		return null;
 	}
 
 	public void update(Polisa entity) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection c = DB.get();
+		PreparedStatement ps = c.prepareStatement(
+				"UPDATE POLISA SET D_PODPISANIA = ?, D_ROZPOCZECIA = ?, D_KONCA = ?, SKLADKA = ? WHERE NR_POLISY IN (?)",
+				Statement.RETURN_GENERATED_KEYS);
+		ps.setString(5, entity.getNrPolisy());
+		ps.setString(1, entity.getdPodpisania().format(DateTimeFormatter.ISO_LOCAL_DATE));
+		ps.setString(2, entity.getdRozpoczecia().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		ps.setString(3, entity.getdKonca().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		ps.setBigDecimal(4, entity.getSkladka());
+		log.info("Zmieniono dane polisy: " + entity);
 
 	}
 
 	public void delete(Polisa entity) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection c = DB.get();
+		PreparedStatement ps = c.prepareStatement(
+				"DELETE FROM POLISA WHERE NR_POLISY = (?)",
+				Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, entity.getNrPolisy());
+		int row = ps.executeUpdate();
+		if (row > 0) {
+			ResultSet rs = ps.getGeneratedKeys();
+			entity.setId(rs.getInt(1));
+		}
+		log.info("Usuniêto polisê z bazy danych: " + entity.getNrPolisy());
 
 	}
 

@@ -23,6 +23,7 @@ public class MapTestt {
 		map.put("c", "c++");
 		map.put("p", "python");
 		map.put("n", "node");
+		//map.put("m", "mm");
 
 		expected = new HashMap<>();
 		expected.put("n", "node");

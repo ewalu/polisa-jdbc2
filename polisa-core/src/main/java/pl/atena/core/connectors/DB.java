@@ -16,7 +16,7 @@ public class DB {
 	private static void init() throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:D:/projekty_akademia/db1/polisa.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:D:/polisa.db");
 			log.info("Nawiązano połączenie z bazą danych");
 		} catch (Exception e) {
 			log.throwing(DB.class.getCanonicalName(), "init", e);

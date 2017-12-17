@@ -1,6 +1,7 @@
 package pl.atena.dao.test;
 
 import static org.junit.Assert.assertTrue;
+import java.util.Random;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
 
@@ -39,8 +40,9 @@ public class PolisaDaoTest {
 
 	@Test
 	public void testCreate() throws SQLException {
+		Random r = new Random();
 		Polisa polisa = new Polisa();
-		polisa.setNrPolisy("10645256");
+		polisa.setNrPolisy("EWA"+LocalDate.now()+-+r.nextInt(1000));
 		polisa.setdPodpisania(LocalDate.now());
 		polisa.setdRozpoczecia(LocalDateTime.now());
 		polisa.setdKonca(LocalDateTime.now().plusYears(1));
@@ -57,6 +59,24 @@ public class PolisaDaoTest {
 		polisa.setdRozpoczecia(LocalDateTime.now());
 		polisa.setdKonca(LocalDateTime.now().plusYears(1));
 		dao.create(polisa);
+	}
+	
+	@Test
+	public void testDelete() throws SQLException {
+		Polisa polisa = new Polisa();
+		polisa.setNrPolisy("EWA20171217001");
+		dao.delete(polisa);
+		//assertTrue(polisa.getId() != null);
+		//assertThat(polisa.getId().intValue(), greaterThan(0));
+	}
+
+	@Test(expected = SQLException.class)
+	public void testDeleteException() throws SQLException {
+		Polisa polisa = new Polisa();
+		polisa.setdPodpisania(LocalDate.now());
+		polisa.setdRozpoczecia(LocalDateTime.now());
+		polisa.setdKonca(LocalDateTime.now().plusYears(1));
+		dao.delete(polisa);
 	}
 
 }
