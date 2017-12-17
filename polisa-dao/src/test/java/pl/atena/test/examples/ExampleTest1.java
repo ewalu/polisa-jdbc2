@@ -19,5 +19,7 @@ public class ExampleTest1 {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testEmptyList() {
 		(new ArrayList()).get(0);
+		//new ArrayList().set(0, 2);
+		
 	}
 }
