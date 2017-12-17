@@ -18,7 +18,7 @@ public class ParameterizedTest3 {
 	// Single parameter, use Object[]
 	@Parameters(name = "{index}: testDomain - {0}")
 	public static Object[] data() {
-		return new Object[] { "google.com", "mkyong.com", "twitter.com", "atena.pl" };
+		return new Object[] { "google-com", "mkyong.com", "twitter.com", "atena.pl","",1 };
 	}
 
 	@Test
