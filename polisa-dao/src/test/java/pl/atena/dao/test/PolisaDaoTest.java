@@ -49,7 +49,7 @@ public class PolisaDaoTest {
 		polisa.setdPodpisania(LocalDate.now());
 		polisa.setdRozpoczecia(LocalDateTime.now());
 		polisa.setdKonca(LocalDateTime.now().plusYears(1));
-		polisa.setSkladka(BigDecimal.valueOf(463.45));
+		polisa.setSkladka(BigDecimal.valueOf(r.nextInt(1000)));
 		dao.create(polisa);
 		assertTrue(polisa.getId() != null);
 		assertThat(polisa.getId().intValue(), greaterThan(0));
@@ -76,7 +76,7 @@ public class PolisaDaoTest {
 	@Test
 	public void testUpdate() throws SQLException {
 		Polisa polisa = new Polisa();
-		polisa.setNrPolisy("10534535435");
+		polisa.setNrPolisy("EWA2018-01-13-500");
 		polisa.setdPodpisania(LocalDate.now().plusDays(1));
 		polisa.setdRozpoczecia(LocalDateTime.now());
 		polisa.setdKonca(LocalDateTime.now().plusYears(1).plusDays(1));
