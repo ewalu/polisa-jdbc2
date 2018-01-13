@@ -115,5 +115,11 @@ public class PolisaDaoTest {
 		PolisaFiltr filtr = new PolisaFiltr();
 		filtr.setSkladka(BigDecimal.valueOf(500.06));
 		dao.select(filtr);
-}
+	}
+	@Test (expected = SQLException.class)
+	public void testSelectException() throws SQLException {
+			PolisaFiltr filtr = new PolisaFiltr();
+			filtr.setSkladka(BigDecimal.valueOf(1500.06));
+			dao.select(filtr);
+	}
 }

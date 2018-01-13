@@ -1,5 +1,6 @@
 package pl.atena.dao.polisa;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,21 +84,24 @@ public class PolisaDao implements BaseDao<Polisa> {
 
 	}
 
-	public List<Polisa> select(PolisaFiltr filtr) throws SQLException {
-		List<Polisa> lista = new ArrayList<>();
+	public void select(PolisaFiltr filtr) throws SQLException {
+		List lista = new ArrayList<>();
 		Connection c = DB.get();
 		PreparedStatement ps = c.prepareStatement(
-				"SELECT NR_POLISY FROM POLISA WHERE SKLADKA > ?",
+				"SELECT count(*) FROM POLISA WHERE SKLADKA > (?)",
 				Statement.RETURN_GENERATED_KEYS);
-		ps.setBigDecimal(1, filtr.getSkladka());
-		ResultSet rows = ps.executeQuery();
-		/*log.info("select:"+rows.);
-		for (int i=1; i<=5; i++) {
-			lista.add(new Polisa());
-			lista.get(i).setNrPolisy(rows.getString(2));
-			log.info("select:" + lista.get(i).getNrPolisy());
-		log.info(lista.toString());
-		}*/
-		return lista;
+		ps.setString(1, filtr.getSkladka().toString());
+		ResultSet count = ps.executeQuery();
+		log.info("select ile wierszy:"+count.getString(1));
+		PreparedStatement ps2 = c.prepareStatement(
+				"SELECT * FROM POLISA WHERE SKLADKA > (?)",
+				Statement.RETURN_GENERATED_KEYS);
+		ps2.setString(1, filtr.getSkladka().toString());
+		ResultSet rows = ps2.executeQuery();
+		for (int i=1; i<=count.getInt(1); i++) {
+			rows.next();
+			lista.add(rows.getString(2));
+		}
+		log.info("Lista polis spe³niaj¹cych warunek:"+lista.toString());
 }
 }

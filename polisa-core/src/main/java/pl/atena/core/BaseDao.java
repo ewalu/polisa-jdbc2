@@ -16,6 +16,6 @@ public interface BaseDao<T extends Entity> {
 
 	void delete(T entity) throws SQLException;
 
-	List<T> select(PolisaFiltr filtr) throws SQLException;
+	void select(PolisaFiltr filtr) throws SQLException;
 
 }
