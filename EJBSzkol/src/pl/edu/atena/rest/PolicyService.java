@@ -2,7 +2,9 @@ package pl.edu.atena.rest;
 
 import java.time.LocalDate;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,18 +19,24 @@ import pl.edu.atena.biz.polisa.PolisaRemote;
 @Path("/polisa")
 public class PolicyService {
 	
+	//@Resource
+	//private SessionContext context;
+	
 	@EJB (beanName = "PolisaDobra")
 	private PolisaLocal polisaLBean;
 	
 	@EJB (beanName = "PolisaZla")
 	private PolisaRemote polisaRBean;
 	
+	@EJB (mappedName = "java:module/PolisaZla!pl.edu.atena.biz.polisa.PolisaZleBean")
+	private PolisaRemote polisaRRBean;
+	
 	@GET
 	@Path("/{param1}/{param2}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response dodaj(@PathParam("param1") int param1, @PathParam("param2") int param2) {
 		int wynik1 = polisaLBean.dodaj(param1, param2);
-		int wynik2 = polisaRBean.dodaj(param1, param2);
+		int wynik2 = polisaRRBean.dodaj(param1, param2);
 		
 		Result result = new Result();
 		result.setWynik1(wynik1);
