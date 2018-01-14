@@ -1,6 +1,7 @@
 package pl.edu.atena.rest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Result {
 	
@@ -8,6 +9,7 @@ public class Result {
 	private int wynik2;
 	private int wynik3;
 	private LocalDate data;
+	private List<String> lista;
 	
 	public int getWynik1() {
 		return wynik1;
@@ -32,6 +34,12 @@ public class Result {
 	}
 	public void setWynik3(int wynik3) {
 		this.wynik3 = wynik3;
+	}
+	public List<String> getLista() {
+		return lista;
+	}
+	public void setLista(List<String> lista) {
+		this.lista = lista;
 	}
 	
 	

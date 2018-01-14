@@ -17,6 +17,7 @@ import pl.edu.atena.biz.polisa.PolisaBean;
 import pl.edu.atena.biz.polisa.PolisaLocal;
 import pl.edu.atena.biz.polisa.PolisaRemote;
 import pl.edu.atena.biz.polisa.RyzykoBean;
+import pl.edu.atena.biz.polisa.SlownikiBean;
 
 @Path("/polisa")
 public class PolicyService {
@@ -35,8 +36,12 @@ public class PolicyService {
 	
 	@EJB
 	private PolisaBean polisaBean;
+	
 	@EJB
 	private RyzykoBean ryzykoBean;
+	
+	@EJB
+	private SlownikiBean slownikiBean;
 
 	
 	@GET
@@ -55,6 +60,7 @@ public class PolicyService {
 		result.setWynik2(wynik2);
 		result.setWynik3(ryzykoBean.dodajRyzyko(param1, param2));
 		result.setData(LocalDate.now());
+		result.setLista(slownikiBean.studenci());
 		
 		return Response.status(200).entity(result).build();
 	}
