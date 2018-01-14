@@ -2,6 +2,7 @@ package pl.edu.atena.biz.polisa;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.Asynchronous;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
@@ -15,6 +16,18 @@ public class PolisaBean implements PolisaLocal, PolisaRemote{
 	
 	public int dodaj(int param1, int param2) {
 		return param1+param2;
+	}
+	
+	@Asynchronous
+	public void dzialaj() {
+		try {
+			log.info("Dzia³am...");
+			Thread.sleep(9000);
+			log.info("Ju¿ koniec!");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@PostConstruct

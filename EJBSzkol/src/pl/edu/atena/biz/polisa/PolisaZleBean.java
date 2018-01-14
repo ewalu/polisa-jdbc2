@@ -21,11 +21,11 @@ private SessionContext context;
 	
 	public int dodaj(int param1, int param2) {
 		
+		//wstrzykiwanie polisy dobrej do z³ej
+		//PolisaLocal polisac = (PolisaLocal) context.lookup("java:global/EJBSzkol/PolisaDobra!pl.edu.atena.biz.polisa.PolisaLocal");
 		
-		PolisaLocal polisac = (PolisaLocal) context.lookup("java:global/EJBSzkol/PolisaDobra!pl.edu.atena.biz.polisa.PolisaLocal");
-		
-		return polisac.dodaj(param1, param2);
-		//return param1+param2;
+		//return polisac.dodaj(param1, param2);
+		return param1-param2;
 	}
 	
 	@PostConstruct

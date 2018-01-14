@@ -6,6 +6,7 @@ public class Result {
 	
 	private int wynik1;
 	private int wynik2;
+	private int wynik3;
 	private LocalDate data;
 	
 	public int getWynik1() {
@@ -25,6 +26,12 @@ public class Result {
 	}
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+	public int getWynik3() {
+		return wynik3;
+	}
+	public void setWynik3(int wynik3) {
+		this.wynik3 = wynik3;
 	}
 	
 	
