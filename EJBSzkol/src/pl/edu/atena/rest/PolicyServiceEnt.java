@@ -1,5 +1,6 @@
 package pl.edu.atena.rest;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.annotation.Resource;
@@ -35,6 +36,20 @@ public class PolicyServiceEnt {
 		return Response.status(200).entity(polisa).build();
 	}
 	
+	@GET
+	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Polisa create2(@PathParam("numerPolisy") String nrPolisy, 
+			@PathParam("ubezpieczajacy") String ubezpieczajacy, 
+			@PathParam("skladka") BigDecimal skladka) {
+				Polisa polisa = new Polisa();
+				polisa.setNumerPolisy(nrPolisy);
+				polisa.setUbezpieczaj¹cy(ubezpieczajacy);
+				polisa.setSkladka(skladka);
+				polisaDao.create(polisa);
+				return polisa;
+	}
+
 	
 	
 	
