@@ -27,7 +27,10 @@ public class PolisaDao {
 	
 	public void delete(Long id) {
 		Polisa polisa = find(id);
-		em.remove(polisa);
+		System.out.println(em.contains(polisa));
+		if (polisa != null) {
+			em.remove(polisa);
+		}
 	}
 	
 
