@@ -51,8 +51,8 @@ public class PolicyService {
 		int wynik1 = polisaLBean.dodaj(param1, param2);
 		int wynik2 = polisaRRBean.dodaj(param1, param2);
 		
-		polisaBean.dzialaj();
-		ryzykoBean.dzialaj();
+		//polisaBean.dzialaj();
+		//ryzykoBean.dzialaj();
 		
 		
 		Result result = new Result();
