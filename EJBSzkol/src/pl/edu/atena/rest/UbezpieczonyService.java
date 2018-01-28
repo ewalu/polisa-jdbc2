@@ -37,13 +37,20 @@ public class UbezpieczonyService {
 	}
 	//http://localhost:8080/EJBSzkol/api/polisa/create
 	@GET
-	@Path("/create/{nazwa}/{polisa_id}")
+	@Path("/create/{nazwa}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Ubezpieczony create2(@PathParam("nazwa") String nazwa, 
-			@PathParam("polisa_id") Long polisa_id) {
+	public Ubezpieczony create2(@PathParam("nazwa") String nazwa) {
 				Ubezpieczony ubezp = new Ubezpieczony();
 				ubezp.setNazwa(nazwa);
-				ubezp.setPolisa(polisaDao.find(polisa_id));
 				return ubezp;
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update/{id_pol}/{id_ubezp}")
+	public Response update(@PathParam("id_pol") Long id_pol, @PathParam("id_ubezp") Long id_ub) {
+		Polisa polisa = polisaDao.find(id_pol);
+		Ubezpieczony ubezp = ubezpDao.dodajPolise(id_ub, polisa);
+		return Response.status(200).entity(ubezp).build();
 	}
 }
