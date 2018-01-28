@@ -15,5 +15,20 @@ public class PolisaDao {
 		em.persist(polisa);
 	}
 	
+	public Polisa find(Long id) {
+		return em.find(Polisa.class,id);
+	}
+	
+	public Polisa update(Long id, String ubezpieczajacy) {
+		Polisa polisaup = find(id);
+		polisaup.setUbezpieczajacy(ubezpieczajacy);
+		return polisaup;
+	}
+	
+	public void delete(Long id) {
+		Polisa polisa = find(id);
+		em.remove(polisa);
+	}
+	
 
 }

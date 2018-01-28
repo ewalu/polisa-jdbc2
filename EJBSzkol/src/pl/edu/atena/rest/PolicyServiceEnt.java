@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -35,7 +36,7 @@ public class PolicyServiceEnt {
 		polisaDao.create(polisa);
 		return Response.status(200).entity(polisa).build();
 	}
-	
+	//http://localhost:8080/EJBSzkol/api/polisa/create
 	@GET
 	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,10 +45,27 @@ public class PolicyServiceEnt {
 			@PathParam("skladka") BigDecimal skladka) {
 				Polisa polisa = new Polisa();
 				polisa.setNumerPolisy(nrPolisy);
-				polisa.setUbezpieczaj¹cy(ubezpieczajacy);
+				polisa.setUbezpieczajacy(ubezpieczajacy);
 				polisa.setSkladka(skladka);
 				polisaDao.create(polisa);
 				return polisa;
+	}
+	//http://localhost:8080/EJBSzkol/api/polisa/update
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	public Response update(Polisa polisa) {
+		Polisa pol = polisaDao.update(polisa.getId(), polisa.getUbezpieczajacy());
+		return Response.status(200).entity(pol).build();
+	}
+	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/delete/{id}")
+	public Response delete(@PathParam("id") Long id) {
+		polisaDao.delete(id);
+		return Response.status(200).build();
 	}
 
 	

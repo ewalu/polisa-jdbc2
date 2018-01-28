@@ -1,7 +1,8 @@
 package pl.edu.atena.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ public class Polisa {
 	private String numerPolisy;
 	private String ubezpieczajacy;
 	private BigDecimal skladka;
+	private LocalDateTime data = LocalDateTime.now();
 	
 	/*public Polisa() {
 		Random r = new Random();
@@ -39,14 +41,20 @@ public class Polisa {
 	public String getUbezpieczajacy() {
 		return ubezpieczajacy;
 	}
-	public void setUbezpieczaj¹cy(String ubezpieczajacy) {
-		this.ubezpieczajacy = ubezpieczajacy;
-	}
 	public BigDecimal getSkladka() {
 		return skladka;
 	}
 	public void setSkladka(BigDecimal skladka) {
 		this.skladka = skladka;
+	}
+	public LocalDateTime getData() {
+		return data;
+	}
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
+	public void setUbezpieczajacy(String ubezpieczajacy) {
+		this.ubezpieczajacy = ubezpieczajacy;
 	}
 
 }
