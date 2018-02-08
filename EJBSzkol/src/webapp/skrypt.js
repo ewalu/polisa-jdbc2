@@ -24,7 +24,7 @@ app.controller('mojCtrl', function($scope, $http){
         $http(
             {
                 method: 'GET',
-                url: '/polisa-jdbc2/EJBSzkol/api/polisa/create',
+                url: '/polisa-jdbc2/EJBSzkol/api/polisa/create/{numerPolisy}/{ubezpieczajacy}/{skladka}',
                 data: scope.model,
                 headers: {'Content-Type': 'application/json '}
             }
