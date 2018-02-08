@@ -23,10 +23,10 @@ app.controller('mojCtrl', function($scope, $http){
     scope.zapiszPolise = () =>{
         $http(
             {
-                method: 'POST',
-                url: '/EJBSzkol/api/polisa/create',
+                method: 'GET',
+                url: '/polisa-jdbc2/EJBSzkol/api/polisa/create',
                 data: scope.model,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json '}
             }
         ).then((response) => {
             isSave = true;
