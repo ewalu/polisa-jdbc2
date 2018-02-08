@@ -16,7 +16,7 @@ import pl.atena.core.connectors.DB;
 import pl.atena.domain.polisa.Polisa;
 import pl.atena.domain.polisa.PolisaFiltr;
 
-public class PolisaDao implements BaseDao<Polisa> {
+public class PolisaDao /*implements BaseDao<Polisa>*/ {
 
 	private Logger log = Logger.getLogger(PolisaDao.class.getCanonicalName());
 
@@ -84,7 +84,7 @@ public class PolisaDao implements BaseDao<Polisa> {
 
 	}
 
-	public void select(PolisaFiltr filtr) throws SQLException {
+	/*public void select(PolisaFiltr filtr) throws SQLException {
 		List lista = new ArrayList<>();
 		Connection c = DB.get();
 		PreparedStatement ps = c.prepareStatement(
@@ -102,6 +102,6 @@ public class PolisaDao implements BaseDao<Polisa> {
 			rows.next();
 			lista.add(rows.getString(2));
 		}
-		log.info("Lista polis spe³niaj¹cych warunek:"+lista.toString());
-}
+		log.info("Lista polis spe³niaj¹cych warunek:"+lista.toString());*
+}*/
 }
