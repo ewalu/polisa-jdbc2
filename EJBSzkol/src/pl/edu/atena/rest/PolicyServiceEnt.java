@@ -36,6 +36,7 @@ public class PolicyServiceEnt {
 		polisaDao.create(polisa);
 		return Response.status(200).entity(polisa).build();
 	}
+	//http://localhost:8080/EJBSzkol/api/polisa/create/Ewa001/EWA/666
 	//http://localhost:8080/EJBSzkol/api/polisa/create
 	@GET
 	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")

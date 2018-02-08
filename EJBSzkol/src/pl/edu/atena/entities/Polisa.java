@@ -17,7 +17,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "EPO_POLISA",
+@Table(name = "polisa",
 uniqueConstraints = {@UniqueConstraint(columnNames= {"numerPolisy"})},
 schema = "public",
 indexes = {@Index(columnList = "numerPolisy")}
