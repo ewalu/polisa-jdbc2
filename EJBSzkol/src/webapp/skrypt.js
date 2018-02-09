@@ -15,17 +15,20 @@ app.controller('mojCtrl', function($scope, $http){
     scope.model = {
         numerPolisy : null,
         ubezpieczajacy : null,
-        skladka : null,
-        signDate : null,
-        statusPolisy : null
+        skladka : null//,
+        //signDate : null,
+        //statusPolisy : null
     }
+
 
     scope.zapiszPolise = () =>{
         $http(
             {
                 method: 'GET',
-                url: 'http://localhost:8080/EJBSzkol/api/polisa/create/',
-                data: scope.model,
+                params: scope.model,
+                url: 'http://localhost:8080/EJBSzkol/api/polisa/create',
+                //params: {"numerPolisy": model.numerPolisy, "ubezpieczajacy": model.ubezpieczajacy, "skladka": model.skladka},
+                //data: scope.model,
                 headers: {'Content-Type': 'application/json '}
             }
         ).then((response) => {

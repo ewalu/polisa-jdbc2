@@ -28,7 +28,7 @@ public class PolicyServiceEnt {
 	@EJB PolisaDao polisaDao;
 	
 	
-	@POST
+	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/create")
@@ -41,8 +41,8 @@ public class PolicyServiceEnt {
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")
 	public Response create2(@PathParam("numerPolisy") String numerPolisy, 
 			@PathParam("ubezpieczajacy") String ubezpieczajacy, 
 			@PathParam("skladka") BigDecimal skladka) {
@@ -51,6 +51,8 @@ public class PolicyServiceEnt {
 				polisa.setUbezpieczajacy(ubezpieczajacy);
 				polisa.setSkladka(skladka);
 				polisaDao.create(polisa);
+				//Response.status(200).entity(polisa).build();
+				//return polisa;
 				return Response.status(200).entity(polisa).build();
 	}
 	//http://localhost:8080/EJBSzkol/api/polisa/update
