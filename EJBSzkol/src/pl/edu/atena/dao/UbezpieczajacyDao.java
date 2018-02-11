@@ -3,6 +3,7 @@ package pl.edu.atena.dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.Ryzyko;
@@ -30,4 +31,13 @@ public class UbezpieczajacyDao {
 		ubezp.setPolisa(polisa);
 		return ubezp;
 	}
+	
+	public Ubezpieczajacy szukajPoNazwie (String nazwa) {
+		Query query = em.createQuery("select u from Ubezpieczajacy u "
+				+"left join u.polisa "
+				+ "where u.nazwa = :nazwaUb");
+		query.setParameter("nazwaUb", nazwa);
+		return (Ubezpieczajacy) query.getSingleResult();
+	}
+	
 }

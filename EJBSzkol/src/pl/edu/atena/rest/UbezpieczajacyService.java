@@ -56,4 +56,14 @@ public class UbezpieczajacyService {
 		Ubezpieczajacy ubezp = ubezpDao.dodajPolise(id_ub, polisa);
 		return Response.status(200).entity(ubezp).build();
 	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/find/name/{nazwaUb}")
+	public Ubezpieczajacy findByName(@PathParam("nazwaUb") String nazwa) {
+				Ubezpieczajacy ubezp = ubezpDao.szukajPoNazwie(nazwa);
+				Response.status(200).entity(ubezp).build();
+				return ubezp;
+	}
 }

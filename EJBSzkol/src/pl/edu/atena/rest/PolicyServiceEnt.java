@@ -2,6 +2,7 @@ package pl.edu.atena.rest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import pl.edu.atena.dao.PolisaDao;
 import pl.edu.atena.entities.Polisa;
+import pl.edu.atena.entities.StatusPolisy;
 
 @Path("/polisa")
 public class PolicyServiceEnt {
@@ -81,6 +83,16 @@ public class PolicyServiceEnt {
 				Polisa polisa = polisaDao.szukajPoNumerze(numerPolisy);
 				Response.status(200).entity(polisa).build();
 				return polisa;
+	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/find/status/{statusPolisy}")
+	public List<Polisa> findByStatus(@PathParam("statusPolisy") StatusPolisy statusPolisy) {
+				List<Polisa> polisy = polisaDao.szukajPoStatusie(statusPolisy);
+				Response.status(200).entity(polisy).build();
+				return polisy;
 	}
 
 	

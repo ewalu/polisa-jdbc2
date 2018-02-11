@@ -10,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "agent", schema = "public")
 public class Agent {
 	
 	@Id
@@ -20,7 +22,7 @@ public class Agent {
 	private String nazwa;
 	
 	@ManyToMany(cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinTable(name="AGENCI_POLISY", foreignKey = @ForeignKey(name = "FK_AGENT_TO_POL"))
+	@JoinTable(name="AGENCI_POLISY", foreignKey = @ForeignKey(name = "FK_AGENT_TO_POL"), schema = "public")
 	private List<Polisa> polisy;
 
 	public Long getId() {
