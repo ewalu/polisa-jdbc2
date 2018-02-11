@@ -31,11 +31,13 @@ app.controller('mojCtrl', function($scope, $http){
                 //data: scope.model,
                 headers: {'Content-Type': 'application/json '}
             }
-        ).then((response) => {
+        ).then(
+            (response) => {
             isSave = true;
             alert(`Poprawnie zapisano dane polisy. Id: ${response.data.id}`);
         }, (response) => {
-            alert('Błąd zapisu danych: ' + response.data);
-        });
+            alert('Błąd zapisu danych: ' + response.data.id);
+        }
+    );
     }
 });
