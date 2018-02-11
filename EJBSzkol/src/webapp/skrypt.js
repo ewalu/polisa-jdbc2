@@ -25,8 +25,8 @@ app.controller('mojCtrl', function($scope, $http){
         $http(
             {
                 method: 'GET',
-                params: scope.model,
-                url: 'http://localhost:8080/EJBSzkol/api/polisa/create',
+                //params: scope.model,
+                url: 'http://localhost:8080/EJBSzkol/api/polisa/create/'+scope.model.numerPolisy+'/'+scope.model.ubezpieczajacy+'/'+scope.model.skladka,
                 //params: {"numerPolisy": model.numerPolisy, "ubezpieczajacy": model.ubezpieczajacy, "skladka": model.skladka},
                 //data: scope.model,
                 headers: {'Content-Type': 'application/json '}
