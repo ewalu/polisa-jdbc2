@@ -3,6 +3,7 @@ package pl.edu.atena.dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import pl.edu.atena.entities.Polisa;
 
@@ -31,6 +32,12 @@ public class PolisaDao {
 		if (polisa != null) {
 			em.remove(polisa);
 		}
+	}
+	
+	public Polisa szukajPoNumerze (String numer) {
+		Query query = em.createQuery("select p from Polisa p where p.numerPolisy = :numerPolisy");
+		query.setParameter("numerPolisy", numer);
+		return (Polisa) query.getSingleResult();
 	}
 	
 

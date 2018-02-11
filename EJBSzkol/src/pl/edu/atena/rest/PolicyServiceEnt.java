@@ -72,6 +72,16 @@ public class PolicyServiceEnt {
 		polisaDao.delete(id);
 		return Response.status(200).build();
 	}
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/find/numer/{numerPolisy}")
+	public Polisa findByNumber(@PathParam("numerPolisy") String numerPolisy) {
+				Polisa polisa = polisaDao.szukajPoNumerze(numerPolisy);
+				Response.status(200).entity(polisa).build();
+				return polisa;
+	}
 
 	
 	

@@ -35,10 +35,10 @@ app.controller('mojCtrl', function($scope, $http){
         ).then(
             (response) => {
             isSave = true;
-           alert(`Poprawnie zapisano dane polisy. Id: ${response.data.id}`);
+           alert(`Poprawnie zapisano dane polisy: ${response.data.numerPolisy}`);
            console.log('ewa666'+response);
         }, (response) => {
-            alert('Błąd zapisu danych: ' + response);
+            alert('Błąd zapisu danychd dla: ' + scope.model.numerPolisy);
             console.log('ewa666'+response);
         }
     );
