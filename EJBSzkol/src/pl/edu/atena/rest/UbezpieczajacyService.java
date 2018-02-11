@@ -13,17 +13,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import pl.edu.atena.dao.PolisaDao;
-import pl.edu.atena.dao.UbezpieczonyDao;
+import pl.edu.atena.dao.UbezpieczajacyDao;
 import pl.edu.atena.entities.Polisa;
-import pl.edu.atena.entities.Ubezpieczony;
+import pl.edu.atena.entities.Ubezpieczajacy;
 
-@Path("/ubezpieczony")
-public class UbezpieczonyService {
+@Path("/ubezpieczajacy")
+public class UbezpieczajacyService {
 	
 	//@Resource
 	//private SessionContext context;
 	
-	@EJB UbezpieczonyDao ubezpDao;
+	@EJB UbezpieczajacyDao ubezpDao;
 	@EJB PolisaDao polisaDao;
 	
 	
@@ -31,7 +31,7 @@ public class UbezpieczonyService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/create")
-	public Response create(Ubezpieczony ubezp) {
+	public Response create(Ubezpieczajacy ubezp) {
 		ubezpDao.create(ubezp);
 		return Response.status(200).entity(ubezp).build();
 	}
@@ -40,8 +40,8 @@ public class UbezpieczonyService {
 	@Path("/create/{nazwa}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Ubezpieczony create2(@PathParam("nazwa") String nazwa) {
-				Ubezpieczony ubezp = new Ubezpieczony();
+	public Ubezpieczajacy create2(@PathParam("nazwa") String nazwa) {
+				Ubezpieczajacy ubezp = new Ubezpieczajacy();
 				ubezp.setNazwa(nazwa);
 				ubezpDao.create(ubezp);
 				return ubezp;
@@ -53,7 +53,7 @@ public class UbezpieczonyService {
 	@Path("/update/{id_pol}/{id_ubezp}")
 	public Response update(@PathParam("id_pol") Long id_pol, @PathParam("id_ubezp") Long id_ub) {
 		Polisa polisa = polisaDao.find(id_pol);
-		Ubezpieczony ubezp = ubezpDao.dodajPolise(id_ub, polisa);
+		Ubezpieczajacy ubezp = ubezpDao.dodajPolise(id_ub, polisa);
 		return Response.status(200).entity(ubezp).build();
 	}
 }

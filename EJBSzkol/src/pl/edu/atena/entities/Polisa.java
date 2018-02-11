@@ -3,13 +3,18 @@ package pl.edu.atena.entities;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +38,12 @@ public class Polisa {
 	private String numerPolisy;
 	private String ubezpieczajacy;
 	private BigDecimal skladka;
+	
+	@ManyToMany (fetch = FetchType.EAGER)
+	private List<Agent> agenci;
+	
+	@OneToMany (fetch = FetchType.EAGER)
+	private List<Ryzyko> ryzyka;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date wr = Date.from(Instant.now());
@@ -97,6 +108,18 @@ public class Polisa {
 	}
 	public void setStatus(StatusPolisy status) {
 		this.status = status;
+	}
+	public List<Agent> getAgenci() {
+		return agenci;
+	}
+	public void setAgenci(List<Agent> agenci) {
+		this.agenci = agenci;
+	}
+	public List<Ryzyko> getRyzyka() {
+		return ryzyka;
+	}
+	public void setRyzyka(List<Ryzyko> ryzyka) {
+		this.ryzyka = ryzyka;
 	}
 
 }

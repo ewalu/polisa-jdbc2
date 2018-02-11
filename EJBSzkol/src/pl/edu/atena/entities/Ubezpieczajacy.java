@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Ubezpieczony {
+public class Ubezpieczajacy {
 	@Id
 	@GeneratedValue
 	private Long id;

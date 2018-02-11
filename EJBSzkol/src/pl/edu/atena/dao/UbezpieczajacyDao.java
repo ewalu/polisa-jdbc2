@@ -5,27 +5,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import pl.edu.atena.entities.Polisa;
-import pl.edu.atena.entities.Ubezpieczony;
+import pl.edu.atena.entities.Ryzyko;
+import pl.edu.atena.entities.Ubezpieczajacy;
 
 @Stateless
-public class UbezpieczonyDao {
+public class UbezpieczajacyDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
 	
-	public void create (Ubezpieczony ubezp) {
+	public void create (Ubezpieczajacy ubezp) {
 		em.persist(ubezp);
 	}
 	
-	public Ubezpieczony find(Long id) {
-		return em.find(Ubezpieczony.class,id);
+	public Ubezpieczajacy find(Long id) {
+		return em.find(Ubezpieczajacy.class,id);
 	}
 	
-	public void refresh(Ubezpieczony ubezp) {
+	public void refresh(Ubezpieczajacy ubezp) {
 		em.refresh(ubezp);
 	}
 	
-	public Ubezpieczony dodajPolise(Long id, Polisa polisa) {
-		Ubezpieczony ubezp = find(id);
+	public Ubezpieczajacy dodajPolise(Long id, Polisa polisa) {
+		Ubezpieczajacy ubezp = find(id);
 		ubezp.setPolisa(polisa);
 		return ubezp;
 	}

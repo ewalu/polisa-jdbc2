@@ -29,14 +29,17 @@ app.controller('mojCtrl', function($scope, $http){
                 url: 'http://localhost:8080/EJBSzkol/api/polisa/create/'+scope.model.numerPolisy+'/'+scope.model.ubezpieczajacy+'/'+scope.model.skladka,
                 //params: {"numerPolisy": model.numerPolisy, "ubezpieczajacy": model.ubezpieczajacy, "skladka": model.skladka},
                 //data: scope.model,
-                headers: {'Content-Type': 'application/json '}
+                headers: {'Content-Type': 'application/json ',},
+                withCredentials: true
             }
         ).then(
             (response) => {
             isSave = true;
-            alert(`Poprawnie zapisano dane polisy. Id: ${response.data.id}`);
+           //alert(`Poprawnie zapisano dane polisy. Id: ${response.data.id}`);
+           console.log('ewa666'+response);
         }, (response) => {
             alert('Błąd zapisu danych: ' + response.data.id);
+            console.log('ewa666'+response);
         }
     );
     }
