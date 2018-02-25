@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PrePersist;
 import javax.persistence.Query;
 
 import pl.edu.atena.entities.Polisa;
@@ -56,6 +59,11 @@ public class PolisaDao {
 		query.setParameter("statusPolisy", status);
 		return (List<Polisa>) query.getResultList();
 	}
+	
+	@PrePersist
+	private void beforeCreate(Polisa object) {
+		System.out.println("Walidacja ...." + object);
+}
 	
 
 }

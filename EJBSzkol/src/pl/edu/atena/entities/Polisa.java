@@ -1,5 +1,6 @@
 package pl.edu.atena.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
@@ -29,7 +30,7 @@ uniqueConstraints = {@UniqueConstraint(columnNames= {"numerPolisy"})},
 schema = "public",
 indexes = {@Index(columnList = "numerPolisy")}
 )
-public class Polisa {
+public class Polisa implements Serializable {
 	
 	@Id
 	@GeneratedValue

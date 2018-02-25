@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.dao.AudytDao;
 import pl.edu.atena.dao.PolisaDao;
 import pl.edu.atena.dao.UbezpieczajacyDao;
@@ -34,6 +35,8 @@ public class PolicyServiceEnt {
 	@EJB PolisaDao polisaDao;
 	@EJB UbezpieczajacyDao ubDao;
 	@EJB AudytDao audytDao;
+	@EJB
+	private PolicyNewProducer policyNewProducer;
 	
 	
 	@GET
@@ -61,6 +64,7 @@ public class PolicyServiceEnt {
 				polisaDao.create(polisa);
 				
 				Audyt aud = new Audyt();
+				policyNewProducer.sendPolicy(polisa);
 				Response.status(200).entity(polisa).build();
 				aud.setKomunikat(numerPolisy);
 				audytDao.create(aud);
