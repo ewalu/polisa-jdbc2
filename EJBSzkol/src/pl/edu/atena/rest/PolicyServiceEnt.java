@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
+import pl.edu.atena.biz.timers.PolicyCountTimer;
 import pl.edu.atena.dao.AudytDao;
 import pl.edu.atena.dao.PolisaDao;
 import pl.edu.atena.dao.UbezpieczajacyDao;
@@ -39,6 +40,8 @@ public class PolicyServiceEnt {
 	private PolicyNewProducer policyNewProducer;
 	@EJB
 	private PolicyNewToTopicProducer policyNewToTopicProducer;
+	@EJB
+	private PolicyCountTimer policyCountTimer;
 	
 	
 	@GET
@@ -67,6 +70,10 @@ public class PolicyServiceEnt {
 				
 				policyNewProducer.sendPolicy(polisa);
 				policyNewToTopicProducer.sendPolicy(polisa);
+				
+				policyCountTimer.create();
+				policyCountTimer.timery();
+				
 				Response.status(200).entity(polisa).build();
 				
 				Ubezpieczajacy ub = new Ubezpieczajacy();

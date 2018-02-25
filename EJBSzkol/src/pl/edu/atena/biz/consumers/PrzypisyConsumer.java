@@ -35,7 +35,7 @@ import pl.edu.atena.entities.Polisa;
 		})
 
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-public class PrzypisyConsumer implements MessageListener {
+public class PrzypisyConsumer implements MessageListener{
 
 	Logger log = Logger.getLogger("PrzypisyConsumer");
 
