@@ -1,6 +1,9 @@
 package pl.edu.atena.dao;
 
+import static javax.ejb.TransactionAttributeType.REQUIRES_NEW;
+
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -9,13 +12,21 @@ import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.Ryzyko;
 import pl.edu.atena.entities.Ubezpieczajacy;
 
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.*;
+
+
 @Stateless
 public class UbezpieczajacyDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
 	
+	
+	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Ubezpieczajacy ubezp) {
 		em.persist(ubezp);
+		
+		//throw new NullPointerException();
 	}
 	
 	public Ubezpieczajacy find(Long id) {

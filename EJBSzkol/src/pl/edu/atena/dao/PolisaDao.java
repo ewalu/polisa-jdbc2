@@ -3,20 +3,26 @@ package pl.edu.atena.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.StatusPolisy;
+import pl.edu.atena.entities.Ubezpieczajacy;
+
+import static javax.ejb.TransactionAttributeType.*;
 
 @Stateless
 public class PolisaDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
 	
+	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Polisa polisa) {
 		em.persist(polisa);
+		
 	}
 	
 	public Polisa find(Long id) {
