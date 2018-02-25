@@ -23,4 +23,9 @@ public class AudytDao {
 		//throw new NullPointerException();
 	}
 
+	public void loguj (String komunikat) {
+		Audyt audyt = new Audyt();
+		audyt.setKomunikat(komunikat);
+		em.persist(audyt);
+	}
 }

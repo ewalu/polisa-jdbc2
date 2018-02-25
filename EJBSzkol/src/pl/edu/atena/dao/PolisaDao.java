@@ -2,6 +2,7 @@ package pl.edu.atena.dao;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionManagement;
@@ -22,9 +23,12 @@ public class PolisaDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
 	
+	@EJB AudytDao audytDao;
+	
 	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Polisa polisa) {
 		em.persist(polisa);
+		audytDao.loguj("tworzenie polisy "+ polisa.getNumerPolisy());
 		
 	}
 	
