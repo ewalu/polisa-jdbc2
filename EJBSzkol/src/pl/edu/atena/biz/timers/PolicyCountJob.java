@@ -21,7 +21,7 @@ public class PolicyCountJob {
 	@Schedule(second = "0", minute = "*", hour = "*")
 	public void execute(Timer timer) {
 		String ile = polisaDao.ilePolis();
-		log.info("Iloœc polis: " + ile + " czas:" + timer.getNextTimeout());
+		log.info("Iloœæ polis: " + ile + " czas:" + timer.getNextTimeout());
 	}
 
 	@PostConstruct
