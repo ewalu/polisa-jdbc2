@@ -1,9 +1,12 @@
 package pl.edu.atena.dao;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
+import javax.ejb.Timer;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -12,6 +15,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
 import javax.persistence.Query;
 
+import pl.edu.atena.biz.producers.PolicyNewProducer;
+import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
+import pl.edu.atena.biz.timers.PolicyCountTimer;
 import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.StatusPolisy;
 import pl.edu.atena.entities.Ubezpieczajacy;
@@ -22,6 +28,13 @@ import static javax.ejb.TransactionAttributeType.*;
 public class PolisaDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
+	
+	@EJB
+	private PolicyNewProducer policyNewProducer;
+	@EJB
+	private PolicyNewToTopicProducer policyNewToTopicProducer;
+	@EJB
+	private PolicyCountTimer policyCountTimer;
 	
 	@EJB AudytDao audytDao;
 	
