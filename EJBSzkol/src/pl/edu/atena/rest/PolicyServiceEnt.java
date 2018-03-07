@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -69,6 +70,7 @@ public class PolicyServiceEnt {
 				polisaDao.create(polisa);
 				
 				policyNewProducer.sendPolicy(polisa);
+				
 				policyNewToTopicProducer.sendPolicy(polisa);
 				
 				policyCountTimer.create();
