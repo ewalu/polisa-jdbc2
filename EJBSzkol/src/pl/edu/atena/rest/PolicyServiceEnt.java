@@ -85,6 +85,7 @@ public class PolicyServiceEnt {
 				//return Response.status(200).entity(polisa).build();
 	}
 	//http://localhost:8080/EJBSzkol/api/polisa/update
+	//http://localhost:8080/EJBSzkol/index.html
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

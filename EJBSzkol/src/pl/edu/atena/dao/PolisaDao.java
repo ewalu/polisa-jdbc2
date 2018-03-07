@@ -64,6 +64,11 @@ public class PolisaDao {
 		return (List<Polisa>) query.getResultList();
 	}
 	
+	public String ilePolis () {
+		Query query = em.createQuery("select count(*) from Polisa p");
+		return query.getResultList().toString();
+	}
+	
 	@PrePersist
 	private void beforeCreate(Polisa object) {
 		System.out.println("Walidacja ...." + object);
