@@ -12,11 +12,13 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
 import javax.persistence.Query;
 
+import pl.edu.atena.biz.interceptors.CzasTrwaniaMetodyLogger;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
 import pl.edu.atena.biz.timers.PolicyCountTimer;
@@ -27,6 +29,7 @@ import pl.edu.atena.entities.Ubezpieczajacy;
 import static javax.ejb.TransactionAttributeType.*;
 
 @Stateless
+@Interceptors(CzasTrwaniaMetodyLogger.class)
 public class PolisaDao {
 	@PersistenceContext(unitName = "PolisaPU")
 	private EntityManager em;
