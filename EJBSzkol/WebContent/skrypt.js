@@ -16,7 +16,7 @@ app.controller('mojCtrl', function($scope, $http){
         numerPolisy : null,
         ubezpieczajacy : null,
         skladka : null,
-        //signDate : null,
+        signDate : null,
         statusPolisy : null
     }
 
