@@ -10,6 +10,8 @@ import javax.ejb.Timer;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
@@ -42,7 +44,6 @@ public class PolisaDao {
 	public void create (Polisa polisa) {
 		em.persist(polisa);
 		audytDao.loguj("tworzenie polisy "+ polisa.getNumerPolisy());
-		
 	}
 	
 	public Polisa find(Long id) {

@@ -55,7 +55,7 @@ public class Polisa implements Serializable {
 	private Date signDate = Date.from(Instant.now());
 	
 	@Enumerated(EnumType.STRING)
-	private StatusPolisy status = StatusPolisy.ZATWIERDZONA;
+	private StatusPolisy status;
 	
 	/*public Polisa() {
 		Random r = new Random();

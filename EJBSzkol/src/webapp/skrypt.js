@@ -15,9 +15,9 @@ app.controller('mojCtrl', function($scope, $http){
     scope.model = {
         numerPolisy : null,
         ubezpieczajacy : null,
-        skladka : null//,
+        skladka : null,
         //signDate : null,
-        //statusPolisy : null
+        statusPolisy : null
     }
 
 
@@ -26,7 +26,7 @@ app.controller('mojCtrl', function($scope, $http){
             {
                 method: 'GET',
                 //params: scope.model,
-                url: 'http://localhost:8080/EJBSzkol/api/polisa/create/'+scope.model.numerPolisy+'/'+scope.model.ubezpieczajacy+'/'+scope.model.skladka,
+                url: 'http://localhost:8080/EJBSzkol/api/polisa/create/'+scope.model.numerPolisy+'/'+scope.model.ubezpieczajacy+'/'+scope.model.skladka+'/'+scope.model.statusPolisy,
                 //params: {"numerPolisy": model.numerPolisy, "ubezpieczajacy": model.ubezpieczajacy, "skladka": model.skladka},
                 //data: scope.model,
                 headers: {'Content-Type': 'application/json '},

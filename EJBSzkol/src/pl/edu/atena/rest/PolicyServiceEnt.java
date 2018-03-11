@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +20,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import pl.edu.atena.biz.annotations.PolisaEvent;
+import pl.edu.atena.biz.annotations.PolisaEvent.Typ;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
 import pl.edu.atena.biz.timers.PolicyCountTimer;
@@ -43,6 +47,15 @@ public class PolicyServiceEnt {
 	private PolicyNewToTopicProducer policyNewToTopicProducer;
 	@EJB
 	private PolicyCountTimer policyCountTimer;
+	@Inject
+	private Event<Polisa> event;
+	@Inject
+	@PolisaEvent(Typ.ZATWIERDZ)
+	private Event<Polisa> eventZatwierdz;
+	@Inject
+	@PolisaEvent(Typ.ZAWIESZ)
+	private Event<Polisa> eventZawiesz;
+	
 	
 	
 	@GET
@@ -59,14 +72,16 @@ public class PolicyServiceEnt {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}")
+	@Path("/create/{numerPolisy}/{ubezpieczajacy}/{skladka}/{status}")
 	public Polisa create2(@PathParam("numerPolisy") String numerPolisy, 
 			@PathParam("ubezpieczajacy") String ubezpieczajacy, 
-			@PathParam("skladka") BigDecimal skladka) {
+			@PathParam("skladka") BigDecimal skladka,
+			@PathParam("status") StatusPolisy status) {
 				Polisa polisa = new Polisa();
 				polisa.setNumerPolisy(numerPolisy);
 				polisa.setUbezpieczajacy(ubezpieczajacy);
 				polisa.setSkladka(skladka);
+				polisa.setStatus(status);
 				polisaDao.create(polisa);
 				
 				policyNewProducer.sendPolicy(polisa);
@@ -83,6 +98,12 @@ public class PolicyServiceEnt {
 				ub.setNazwa(ubezpieczajacy);
 				ub.setPolisa(polisa);
 				ubDao.create(ub);
+				if (polisa.getStatus().equals(StatusPolisy.ZATWIERDZONA)) {
+					eventZatwierdz.fire(polisa);
+				}
+				if (polisa.getStatus().equals(StatusPolisy.ZAWIESZONA)) {
+					eventZawiesz.fire(polisa);
+				}
 				return polisa;
 				//return Response.status(200).entity(polisa).build();
 	}

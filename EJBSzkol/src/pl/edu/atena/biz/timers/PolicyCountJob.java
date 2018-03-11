@@ -18,7 +18,7 @@ public class PolicyCountJob {
 	private Logger log = Logger.getLogger("PolicyCountJob");
 	@EJB PolisaDao polisaDao;
 
-	@Schedule(second = "0", minute = "*", hour = "*")
+	//@Schedule(second = "0", minute = "*", hour = "*")
 	public void execute(Timer timer) {
 		String ile = polisaDao.ilePolis();
 		log.info("Iloœæ polis: " + ile + " czas:" + timer.getNextTimeout());
