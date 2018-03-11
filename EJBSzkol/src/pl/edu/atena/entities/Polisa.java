@@ -124,10 +124,10 @@ public class Polisa implements Serializable {
 	public void setRyzyka(List<Ryzyko> ryzyka) {
 		this.ryzyka = ryzyka;
 	}
-	/*@Override
-	public String toString(){
-		String dane = this.getNumerPolisy()+'_'+this.getStatus().toString();
-		return dane;
-	}*/
+	@Override
+	public String toString() {
+		return "Polisa [numerPolisy=" + numerPolisy + ", ubezpieczajacy=" + ubezpieczajacy + ", skladka=" + skladka
+				+ ", signDate=" + signDate + ", status=" + status + "]";
+	}
 
 }
