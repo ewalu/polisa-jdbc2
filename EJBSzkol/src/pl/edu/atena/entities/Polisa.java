@@ -23,6 +23,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "polisa",
@@ -30,6 +33,8 @@ uniqueConstraints = {@UniqueConstraint(columnNames= {"numerPolisy"})},
 schema = "public",
 indexes = {@Index(columnList = "numerPolisy")}
 )
+
+@XmlRootElement
 public class Polisa implements Serializable {
 	
 	@Id
@@ -66,12 +71,14 @@ public class Polisa implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	@XmlAttribute
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNumerPolisy() {
 		return numerPolisy;
 	}
+	@XmlElement
 	public void setNumerPolisy(String numerPolisy) {
 		this.numerPolisy = numerPolisy;
 	}
@@ -81,10 +88,11 @@ public class Polisa implements Serializable {
 	public BigDecimal getSkladka() {
 		return skladka;
 	}
+	@XmlElement
 	public void setSkladka(BigDecimal skladka) {
 		this.skladka = skladka;
 	}
-
+	@XmlElement
 	public void setUbezpieczajacy(String ubezpieczajacy) {
 		this.ubezpieczajacy = ubezpieczajacy;
 	}
@@ -97,18 +105,21 @@ public class Polisa implements Serializable {
 	public Date getWr() {
 		return wr;
 	}
+	@XmlElement
 	public void setWr(Date wr) {
 		this.wr = wr;
 	}
 	public Date getSignDate() {
 		return signDate;
 	}
+	@XmlElement
 	public void setSignDate(Date signDate) {
 		this.signDate = signDate;
 	}
 	public StatusPolisy getStatus() {
 		return status;
 	}
+	@XmlElement
 	public void setStatus(StatusPolisy status) {
 		this.status = status;
 	}

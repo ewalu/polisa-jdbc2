@@ -10,6 +10,7 @@ import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.Response;
 
 import pl.edu.atena.biz.annotations.PolisaEvent;
 import pl.edu.atena.biz.annotations.PolisaEvent.Typ;
+import pl.edu.atena.biz.file.ZapiszDoXML;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
 import pl.edu.atena.biz.timers.PolicyCountTimer;
@@ -41,9 +43,10 @@ public class PolicyServiceEnt {
 	
 	@EJB PolisaDao polisaDao;
 	@EJB UbezpieczajacyDao ubDao;
+	
 	@EJB
 	private PolicyNewProducer policyNewProducer;
-	@EJB
+	@Inject
 	private PolicyNewToTopicProducer policyNewToTopicProducer;
 	@EJB
 	private PolicyCountTimer policyCountTimer;
@@ -56,7 +59,9 @@ public class PolicyServiceEnt {
 	@PolisaEvent(Typ.ZAWIESZ)
 	private Event<Polisa> eventZawiesz;
 	
-	
+	@Inject
+	@Named
+	private ZapiszDoXML xml;
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -83,6 +88,7 @@ public class PolicyServiceEnt {
 				polisa.setSkladka(skladka);
 				polisa.setStatus(status);
 				polisaDao.create(polisa);
+				xml.zapisz(polisa);
 				
 				policyNewProducer.sendPolicy(polisa);
 				
