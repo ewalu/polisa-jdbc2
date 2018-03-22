@@ -1,8 +1,15 @@
 package pl.edu.atena.rest;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
+
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -23,6 +30,7 @@ import javax.ws.rs.core.Response;
 
 import pl.edu.atena.biz.annotations.PolisaEvent;
 import pl.edu.atena.biz.annotations.PolisaEvent.Typ;
+import pl.edu.atena.biz.file.ZapiszDoJSON;
 import pl.edu.atena.biz.file.ZapiszDoXML;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
@@ -62,6 +70,7 @@ public class PolicyServiceEnt {
 	@Inject
 	@Named
 	private ZapiszDoXML xml;
+	private ZapiszDoJSON jsonn;
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -89,6 +98,7 @@ public class PolicyServiceEnt {
 				polisa.setStatus(status);
 				polisaDao.create(polisa);
 				xml.zapisz(polisa);
+				//jsonn.zapisz(polisa);
 				
 				policyNewProducer.sendPolicy(polisa);
 				
@@ -110,6 +120,7 @@ public class PolicyServiceEnt {
 				if (polisa.getStatus().equals(StatusPolisy.ZAWIESZONA)) {
 					eventZawiesz.fire(polisa);
 				}
+				
 				return polisa;
 				//return Response.status(200).entity(polisa).build();
 	}

@@ -3,8 +3,6 @@ package pl.edu.atena.biz.file;
 import java.io.File;
 import java.io.IOException;
 
-import javax.inject.Named;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,7 +16,7 @@ public class ZapiszDoJSON implements ZapiszDoPliku {
 		try {
 			// Convert object to JSON string and save into a file directly
 			//mapper.writeValue(new File("c:\\" + polisa.getNumerPolisy() + ".json"), polisa);
-
+			File file = new File("D:\\pliki\\polisa.json");
 			// Convert object to JSON string
 			String jsonInString = mapper.writeValueAsString(polisa);
 			System.out.println(jsonInString);
@@ -28,7 +26,7 @@ public class ZapiszDoJSON implements ZapiszDoPliku {
 			System.out.println(jsonInString);
 			
 			
-			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("D:\\pliki\\" + polisa.getNumerPolisy() + ".json"), polisa);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file, polisa);
 			
 
 		} catch (JsonGenerationException e) {
