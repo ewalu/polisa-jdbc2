@@ -1,12 +1,19 @@
 package pl.edu.atena.dao;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.ejb.Timer;
+import javax.ejb.TimerService;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -22,6 +29,7 @@ import pl.edu.atena.biz.interceptors.CzasTrwaniaMetodyLogger;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
 import pl.edu.atena.biz.timers.PolicyCountTimer;
+import pl.edu.atena.biz.timers.PolicySendTimer;
 import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.StatusPolisy;
 import pl.edu.atena.entities.Ubezpieczajacy;
@@ -40,14 +48,15 @@ public class PolisaDao {
 	private PolicyNewToTopicProducer policyNewToTopicProducer;
 	@EJB
 	private PolicyCountTimer policyCountTimer;
+	@EJB
+	private PolicySendTimer policySendTimer;
 	
 	@EJB AudytDao audytDao;
 	
 	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Polisa polisa) {
 		em.persist(polisa);
-		audytDao.loguj("tworzenie polisy "+ polisa.getNumerPolisy());
-	}
+		}
 	
 	public Polisa find(Long id) {
 		return em.find(Polisa.class,id);
