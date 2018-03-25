@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 @Table(name = "ubezpieczajacy", schema = "public")
@@ -28,7 +29,9 @@ public class Ubezpieczajacy {
 	public String getNazwa() {
 		return nazwa;
 	}
-
+	
+	
+	@XmlElement(name = "Name")
 	public void setNazwa(String nazwa) {
 		this.nazwa = nazwa;
 	}
