@@ -6,13 +6,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-import javax.ejb.Timer;
 import javax.ejb.TimerService;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionManagement;
@@ -51,13 +52,25 @@ public class PolisaDao {
 	@EJB
 	private PolicySendTimer policySendTimer;
 	
+	private Logger log = Logger.getLogger("PolicyTimer");
+	
 	@EJB AudytDao audytDao;
 	
 	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Polisa polisa) {
 		em.persist(polisa);
-		}
-	
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			  @Override
+			  public void run() {
+				  policyNewToTopicProducer.sendPolicy(polisa);
+				  log.info("Wysy³ka polisy jej timer: " +polisa.getNumerPolisy());
+			  }
+			}, 15*1000, 60*1000);
+		//timer.cancel();
+		
+	}
+		
 	public Polisa find(Long id) {
 		return em.find(Polisa.class,id);
 	}
