@@ -89,7 +89,7 @@ public class PolisaDao {
 	
 	public Polisa szukajPoNumerze (String numer) {
 		Query query = em.createQuery("select p from Polisa p "
-				+"join fetch p.agenci "
+				//+"join fetch p.agenci "
 				+ "where p.numerPolisy = :numerPolisy");
 		query.setParameter("numerPolisy", numer);
 		return (Polisa) query.getSingleResult();
