@@ -31,7 +31,7 @@ public class Ubezpieczajacy {
 	}
 	
 	
-	@XmlElement(name = "Name")
+	@XmlElement(name = "NAME")
 	public void setNazwa(String nazwa) {
 		this.nazwa = nazwa;
 	}
