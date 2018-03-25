@@ -31,6 +31,7 @@ import javax.ws.rs.core.Response;
 import pl.edu.atena.biz.annotations.PolisaEvent;
 import pl.edu.atena.biz.annotations.PolisaEvent.Typ;
 import pl.edu.atena.biz.file.ZapiszDoJSON;
+import pl.edu.atena.biz.file.ZapiszDoPliku;
 import pl.edu.atena.biz.file.ZapiszDoXML;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
@@ -69,8 +70,10 @@ public class PolicyServiceEnt {
 	
 	@Inject
 	@Named
-	private ZapiszDoXML xml;
-	private ZapiszDoJSON jsonn;
+	private ZapiszDoPliku xml;
+	//@Inject
+	//@Named
+	//private ZapiszDoPliku json;
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)

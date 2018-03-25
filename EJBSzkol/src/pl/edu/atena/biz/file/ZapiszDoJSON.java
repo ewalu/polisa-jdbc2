@@ -3,12 +3,15 @@ package pl.edu.atena.biz.file;
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Named;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import pl.edu.atena.entities.Polisa;
 
+@Named("json")
 public class ZapiszDoJSON implements ZapiszDoPliku {
 	
 	public void zapisz(Polisa polisa) {
