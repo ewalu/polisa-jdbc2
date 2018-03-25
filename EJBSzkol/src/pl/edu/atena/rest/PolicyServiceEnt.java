@@ -71,9 +71,9 @@ public class PolicyServiceEnt {
 	@Inject
 	@Named
 	private ZapiszDoPliku xml;
-	//@Inject
-	//@Named
-	//private ZapiszDoPliku json;
+	@Inject
+	@Named
+	private ZapiszDoPliku json;
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -101,7 +101,7 @@ public class PolicyServiceEnt {
 				polisa.setStatus(status);
 				polisaDao.create(polisa);
 				xml.zapisz(polisa);
-				//jsonn.zapisz(polisa);
+				json.zapisz(polisa);
 				
 				policyNewProducer.sendPolicy(polisa);
 				
