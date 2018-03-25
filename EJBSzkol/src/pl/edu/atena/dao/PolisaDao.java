@@ -30,7 +30,6 @@ import pl.edu.atena.biz.interceptors.CzasTrwaniaMetodyLogger;
 import pl.edu.atena.biz.producers.PolicyNewProducer;
 import pl.edu.atena.biz.producers.PolicyNewToTopicProducer;
 import pl.edu.atena.biz.timers.PolicyCountTimer;
-import pl.edu.atena.biz.timers.PolicySendTimer;
 import pl.edu.atena.entities.Polisa;
 import pl.edu.atena.entities.StatusPolisy;
 import pl.edu.atena.entities.Ubezpieczajacy;
@@ -49,8 +48,6 @@ public class PolisaDao {
 	private PolicyNewToTopicProducer policyNewToTopicProducer;
 	@EJB
 	private PolicyCountTimer policyCountTimer;
-	@EJB
-	private PolicySendTimer policySendTimer;
 	
 	private Logger log = Logger.getLogger("PolicyTimer");
 	
@@ -59,14 +56,15 @@ public class PolisaDao {
 	@TransactionAttribute(REQUIRES_NEW)
 	public void create (Polisa polisa) {
 		em.persist(polisa);
-		Timer timer = new Timer();
+		//timer polisy
+		/*Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			  @Override
 			  public void run() {
 				  policyNewToTopicProducer.sendPolicy(polisa);
 				  log.info("Wysy³ka polisy jej timer: " +polisa.getNumerPolisy());
 			  }
-			}, 15*1000, 60*1000);
+			}, 15*1000, 60*1000);*/
 		//timer.cancel();
 		
 	}
