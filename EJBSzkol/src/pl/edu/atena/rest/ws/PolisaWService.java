@@ -11,7 +11,7 @@ import javax.jws.WebService;
 
 import pl.edu.atena.dao.PolisaDao;
 import pl.edu.atena.entities.Polisa;
-import pl.edu.atena.entities.StatusPolisy;
+//import pl.edu.atena.entities.StatusPolisy;
 
 @WebService(serviceName = "Polisa", targetNamespace = "http://pl.edu.atena.akademia")
 public class PolisaWService {
