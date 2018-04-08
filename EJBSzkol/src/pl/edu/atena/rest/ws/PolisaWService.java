@@ -2,7 +2,7 @@ package pl.edu.atena.rest.ws;
 
 import java.math.BigDecimal;
 
-import javax.ejb.EJB;
+//import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
