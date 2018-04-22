@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,6 +44,7 @@ public class Polisa implements Serializable {
 	
 	@Transient
 	private Long idTemp;
+	@Column(nullable = false)
 	private String numerPolisy;
 	private String ubezpieczajacy;
 	private BigDecimal skladka;

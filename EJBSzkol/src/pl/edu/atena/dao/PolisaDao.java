@@ -62,7 +62,7 @@ public class PolisaDao {
 			  @Override
 			  public void run() {
 				  policyNewToTopicProducer.sendPolicy(polisa);
-				  log.info("Wysy³ka polisy jej timer: " +polisa.getNumerPolisy());
+				  log.info("Wysyï¿½ka polisy jej timer: " +polisa.getNumerPolisy());
 			  }
 			}, 15*1000, 60*1000);*/
 		//timer.cancel();
@@ -78,6 +78,11 @@ public class PolisaDao {
 		polisaup.setUbezpieczajacy(ubezpieczajacy);
 		return polisaup;
 	}
+	
+	public Polisa update2(Polisa polisa) {
+		System.out.println(em.contains(polisa));
+		return em.merge(polisa);
+}
 	
 	public void delete(Long id) {
 		Polisa polisa = find(id);
@@ -104,6 +109,10 @@ public class PolisaDao {
 	public String ilePolis () {
 		Query query = em.createQuery("select count(*) from Polisa p");
 		return query.getResultList().toString();
+	}
+	public List<Polisa> select(){
+		Query query = em.createQuery("select p from Polisa p");
+		return query.getResultList();
 	}
 	
 	@PrePersist
